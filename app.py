@@ -11,7 +11,11 @@ st.set_page_config(
 )
 
 # Load Model
-model = load_model("cnn_cancer_model.h5")
+@st.cache_resource
+def load_my_model():
+    return load_model("cnn_cancer_model.h5")
+
+model = load_my_model()
 
 def prediction(uploaded_file):
     img = image.load_img(uploaded_file, target_size=(224, 224))
